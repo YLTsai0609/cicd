@@ -14,6 +14,7 @@
   * 可確保每次推送的版本都是可以運作的，否則就會擋下來
   * Code --> Build --> Test
 CD (Continuous Delivery/Deployment)
+  * 持續部署，通過自動化測試後，將變更後的程式碼，自動化佈署到對應的機器/叢集 (GCE, GKE, ...)
   * Test --> Release --> Deploy
 
 * CI/CD 工具多元且通常自動化，常見的使用方法就是在專案中加入一個 yaml or README.md
