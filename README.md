@@ -4,7 +4,7 @@
 
 [2022 CI/CD X Jenkins、CircleCI、Github Action 從把妹角度理解前後端如何和平相處](https://linyencheng.github.io/2022/10/10/relationships-between-frontend-and-backend/devops-ci-cd-jenkins-circleci-and-github-action/)
 
-# 什麼是 CI/CD from 2022 CI/CD x Jenkins、CircleCI、...
+# 什麼是 CI/CD (2022)
 
 * 確保程式碼再提交之後，減少因為少部分檯面下的更動，而影響程式碼運作，確保程式碼的品質
 
