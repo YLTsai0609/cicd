@@ -31,3 +31,7 @@ https://www.muyuanzhan.com/tutorials/python/2849.html
 <img src='./assets/cicd_1.png'></img>
 
 check document @ https://circleci.com/docs/language-python/
+
+# FutherMore
+
+[Concept](concept.md)
