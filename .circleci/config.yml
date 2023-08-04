@@ -51,22 +51,31 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          name: exportKey
-          command: echo $GCLOUD_SERVICE_KEY > /tmp/gcloud-service-key.json
+        name: export key from circle ci settings
+        command: echo $GCLOUD_SERVICE_KEY > /tmp/gcloud-service-key.json
+      -run:
+        name: setup env-variables
+        command: |
+            export \
+            GOOGLE_PROJECT_ID=${GOOGLE_PROJECT_ID} \
+            GOOGLE_COMPUTE_ZONE=${GOOGLE_COMPUTE_ZONE} \
+            GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-service-key.json
       - run:
-          name: login
-          command: |
-            gcloud auth activate-service-account --key-file=/tmp/gcloud-service-key.json
+        name: gcp auth login
+        command: |
+          gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
-          name: install package
-          command: |
-            pip install -r requirements-bq.txt 
-            # sudo command is not found on cloud-sdk images
+        name: install package
+        command: |
+          pip install -r requirements-bq.txt 
+          # sudo command is not found on cloud-sdk images
       - run:
-          name: test bq 
-          no_output_timeout: 5m
-          command: |
-            pytest -vv --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_bq.py
+        name: test bq 
+        no_output_timeout: 5m
+        command: |
+          pytest -vv --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_bq.py
 
 
   
