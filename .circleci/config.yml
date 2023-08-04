@@ -59,8 +59,9 @@ jobs:
           command: |
             export \
             GOOGLE_PROJECT_ID=${GOOGLE_PROJECT_ID} \
-            GOOGLE_COMPUTE_ZONE=${GOOGLE_COMPUTE_ZONE} \
-            GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-service-key.json
+            GOOGLE_COMPUTE_ZONE=${GOOGLE_COMPUTE_ZONE}
+            
+            export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-service-key.json
       - run:
           name: gcp auth login
           command: |
