@@ -1,7 +1,6 @@
 version: 2.1  
   
 jobs:  
-  # build, compile
   build:  
     working_directory: ~/circleci-python  
     docker:  
@@ -9,7 +8,6 @@ jobs:
     steps:  
       - checkout  
       - run: python3 main.py  
-  # unit-test
   unit-test:  
     working_directory: ~/circleci-python  
     docker:  
