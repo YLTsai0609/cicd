@@ -60,7 +60,8 @@ jobs:
       - run:
           name: install package
           command: |
-            sudo pip install -r requirements-bq.txt
+            pip install -r requirements-bq.txt 
+            # sudo command is not found on cloud-sdk images
       - run:
           name: test bq 
           no_output_timeout: 5m
