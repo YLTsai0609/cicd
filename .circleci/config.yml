@@ -43,9 +43,10 @@ jobs:
 
 
   # something needs google-bigquery
-  unit-test-with-bq:
+  unit-test-with-bq-redis:
     docker:
       - image: google/cloud-sdk:359.0.0
+      - image: cimg/redis:6.2.6
     steps:
       - checkout
       - setup_remote_docker:
@@ -72,11 +73,11 @@ jobs:
             pip install -r requirements-bq.txt 
             # sudo command is not found on cloud-sdk images
       - run:
-          name: test bq 
+          name: test bq and redis
           no_output_timeout: 5m
           command: |
             export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-service-key.json
-            pytest -vv --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_bq.py
+            pytest -vv --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_bq.py tests/test_redis.py
 
 
   
