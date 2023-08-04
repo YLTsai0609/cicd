@@ -2,25 +2,39 @@ version: 2.1
   
 jobs:  
   build:  
-    working_directory: ~/circleci-python  
     docker:  
       - image: "circleci/python:3.6.4"  
     steps:  
       - checkout  
       - run: python3 main.py  
-  test:  
-    working_directory: ~/circleci-python  
+  
+  
+  unit-test:  
     docker:  
       - image: "circleci/python:3.6.4"  
     steps:  
       - checkout  
-      - run: python3 main_test.py  
+      - run:
+          name: install package
+          command: |
+            sudo pip install -r requirements.txt 
+      - run:
+          name: test
+          no_output_timeout: 60m
+          command: |
+            pytest -v --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/
   
+  # something needs redis
+
+  # something needs google-bigquery
+  
+  # something that build dockerfile
+
 workflows:  
   build_and_test:  
     jobs:  
       - build  
-      - test:  
+      - unit-test:  
           requires:  
             - build
 
