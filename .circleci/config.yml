@@ -17,7 +17,7 @@ jobs:
       - run:
           name: install package
           command: |
-            pip install -r requirements.txt --user
+            sudo pip install -r requirements.txt 
       - run:
           name: test
           no_output_timeout: 60m
