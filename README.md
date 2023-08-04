@@ -6,7 +6,7 @@
 
 [CI/CD是什麼？一篇認識CI/CD工具及優勢，將日常瑣事自動化](https://www.wingwill.com.tw/zh-tw/%E9%83%A8%E8%90%BD%E6%A0%BC/%E9%9B%B2%E5%9C%B0%E6%B7%B7%E5%90%88%E6%87%89%E7%94%A8/cicd%E5%B7%A5%E5%85%B7/)
 
-2. [全棧測試｜交付高品質軟體的實務指南](https://www.books.com.tw/products/0010961495)
+[全棧測試｜交付高品質軟體的實務指南](https://www.books.com.tw/products/0010961495)
 
 # 什麼是 CI/CD (2022)
 
@@ -28,7 +28,7 @@ CD (Continuous Delivery/Deployment)
 
 ## Why so serious
 
-1. **開發**時會因為有時程壓力導致技術債的產生，此時從**維運**角度看，累積技術債，累積小 bug，不良的命名和無抽系的程式碼和測試方式，使得該程式碼後續難以維護，因此開發和維運常常吵架
+* **開發**時會因為有時程壓力導致技術債的產生，此時從**維運**角度看，累積技術債，累積小 bug，不良的命名和無抽系的程式碼和測試方式，使得該程式碼後續難以維護，因此開發和維運常常吵架
 
 ## Pros of CI
 
@@ -69,8 +69,6 @@ e.g.
 repo : https://github.com/YLTsai0609/cicd
 
 https://www.muyuanzhan.com/tutorials/python/2849.html
-
-<img src='./assets/cicd_1.png'></img>
 
 check document @ https://circleci.com/docs/language-python/
 
