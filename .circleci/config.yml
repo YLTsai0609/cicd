@@ -20,9 +20,9 @@ jobs:
             sudo pip install -r requirements.txt 
       - run:
           name: test no redis
-          no_output_timeout: 60m
+          no_output_timeout: 3m
           command: |
-            pytest -v --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_something.py
+            pytest -vv --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_something.py
   
   # something needs redis
   unit-test-with-redis:
@@ -36,13 +36,38 @@ jobs:
         command: |
           sudo pip install -r requirements-redis.txt
     - run:
-        name: test all
-        no_output_timeout: 60m
+        name: test redis
+        no_output_timeout: 3m
         command: |
-          pytest -v --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/
+          pytest -vv --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_redis.py
 
 
   # something needs google-bigquery
+  unit-test-with-bq:
+    docker:
+      - image: google/cloud-sdk:359.0.0
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: exportKey
+          command: echo $GCLOUD_SERVICE_KEY > /tmp/gcloud-service-key.json
+      - run:
+          name: login
+          command: |
+            gcloud auth activate-service-account --key-file=/tmp/gcloud-service-key.json
+      - run:
+          name: install package
+          command: |
+            sudo pip install -r requirements-bq.txt
+      - run:
+          name: test bq 
+          no_output_timeout: 5m
+          command: |
+            pytest -vv --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_bq.py
+
+
   
   # something that build dockerfile
 
