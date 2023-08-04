@@ -59,13 +59,11 @@ jobs:
           command: |
             export \
             GOOGLE_PROJECT_ID=${GOOGLE_PROJECT_ID} \
-            GOOGLE_COMPUTE_ZONE=${GOOGLE_COMPUTE_ZONE}
-            
-            export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-service-key.json
+            GOOGLE_COMPUTE_ZONE=${GOOGLE_COMPUTE_ZONE}      
       - run:
           name: gcp auth login
           command: |
-            gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+            gcloud auth activate-service-account --key-file=/tmp/gcloud-service-key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
@@ -77,6 +75,7 @@ jobs:
           name: test bq 
           no_output_timeout: 5m
           command: |
+            export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-service-key.json
             pytest -vv --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_bq.py
 
 
