@@ -90,10 +90,10 @@ workflows:
       - unit-test:  
           requires:  
             - build
-  build_and_test_bq_connections:  
+  build_and_unit_test_with_bq_redis:  
     jobs:  
       - build  
-      - unit-test-with-bq:  
+      - unit-test-with-bq-redis:  
           requires:  
             - build
   # trigger this using click on CircleCI UI
