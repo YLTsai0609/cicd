@@ -23,14 +23,15 @@ jobs:
       - run:
         name: test
         no_output_timeout: 60m
-        command: pytest -v --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/
+        command: |
+          pytest -v --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/
   
   # something needs redis
 
   # something needs google-bigquery
   
   # something that build dockerfile
-  
+
 workflows:  
   build_and_test:  
     jobs:  
