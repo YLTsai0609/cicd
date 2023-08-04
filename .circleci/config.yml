@@ -19,12 +19,28 @@ jobs:
           command: |
             sudo pip install -r requirements.txt 
       - run:
-          name: test
+          name: test no redis
           no_output_timeout: 60m
           command: |
-            pytest -v --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/
+            pytest -v --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/test_something.py
   
   # something needs redis
+  unit-test-with-redis:
+    docker:
+      - image: "circleci/python:3.6.4"  
+      - image: cimg/redis:6.2.6
+    steps:  
+    - checkout  
+    - run:
+        name: install package
+        command: |
+          sudo pip install -r requirements-redis.txt
+    - run:
+        name: test all
+        no_output_timeout: 60m
+        command: |
+          pytest -v --durations=10 --cov-report term-missing --cov-config=.coveragerc tests/
+
 
   # something needs google-bigquery
   
@@ -37,4 +53,15 @@ workflows:
       - unit-test:  
           requires:  
             - build
-
+  # trigger this using click
+  unit-test-with-redis:
+    jobs:
+      - hold:
+          type: approval
+          filters:
+            branches:
+              ignore:
+                - master
+      - unit-test-with-redis:
+          requires:
+            - hold
