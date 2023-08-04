@@ -1,5 +1,5 @@
 import pytest
-from bq import BQ
+from cicd.bq import BQ
 
 @pytest.fixture(scope="module")
 def bq():
