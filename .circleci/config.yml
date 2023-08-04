@@ -78,7 +78,13 @@ workflows:
       - unit-test:  
           requires:  
             - build
-  # trigger this using click
+  build_and_test_bq_connections:  
+    jobs:  
+      - build  
+      - unit-test-with-bq:  
+          requires:  
+            - build
+  # trigger this using click on CircleCI UI
   unit-test-with-redis:
     jobs:
       - hold:
