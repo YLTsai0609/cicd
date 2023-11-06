@@ -77,3 +77,5 @@ check document @ https://circleci.com/docs/language-python/
 [Concept](concept.md)
 
 [circleci101](ci101.md)
+
+[Automatic Testing](at.md)
