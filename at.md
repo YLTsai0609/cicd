@@ -38,7 +38,7 @@
     * 測試要跑多久局限於外部系統的回應時間
 
 * API 規約測試
-    * 串接的另一端也還在開發，整合測試就側無可測，這發生在大型應用上，被切分成好幾個團隊，每個團隊負責幾個服務，服務之間制定各自的 API Spec
+    * 串接的另一端也還在開發，整合測試就測無可測，這發生在大型應用上，被切分成好幾個團隊，每個團隊負責幾個服務，服務之間制定各自的 API Spec
     * 用於測試 API 是否給定參數，可以正常回應，而不是測試回覆資料是否正確
     * 測試規模小，跑得快，共存於程式碼內，但需要和外部團隊溝通，溝通成本會較高
     * 測試工具如 Postman, Pact
@@ -50,3 +50,18 @@
 * E2E 測試
 
 * 自動化功能測試策略
+
+
+# Applications
+
+* ML Pipeline integrations
+    * usually needs download, upload dataset/model from bigquery / gcs (batch)
+    * usually needs download, upload dataset/model from redis (micro-batch , streaming)
+    * cannot ask for high coverage unit-test
+        * different role/titles
+        * ml-pipeline code usually needs too much data transformation, too much work....
+    * training / prediction may needs a lot of computation resource
+
+* strategy
+    * automatic integration test - time saving (**1.5 days --> immediately**)
+    * if ENV == DEV, samples = samples[:1000] (to speed up)
