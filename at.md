@@ -55,13 +55,32 @@
 # Applications
 
 * ML Pipeline integrations
-    * usually needs download, upload dataset/model from bigquery / gcs (batch)
-    * usually needs download, upload dataset/model from redis (micro-batch , streaming)
-    * cannot ask for high coverage unit-test
-        * different role/titles
-        * ml-pipeline code usually needs too much data transformation, too much work....
-    * training / prediction may needs a lot of computation resource
 
-* strategy
-    * automatic integration test - time saving (**1.5 days --> immediately**)
-    * if ENV == DEV, samples = samples[:1000] (to speed up)
+**CICD metrics**
+|指標|達成條件|
+|----|------|
+|部署頻率|根據需求 - 一天能做到幾次部署?|
+|交期|低於一天|
+|平均恢復時間|低於一小時|
+|改版改壞比例|0-15%|
+
+現況
+* 改版改壞比例很高，且很多初級錯誤，e.g. `cannot import xxx from bbb`
+* 平均恢復時間 ~ 2天 (很多的時間是 DS 發 PR --> 等待 DE Merge, --> 部署進入 stage 環境 --> 等 airflow 長出 DAG, 才能進行整合測試)
+
+背景
+* usually needs download, upload dataset/model from bigquery / gcs (batch)
+* usually needs download, upload dataset/model from redis (micro-batch , streaming)
+* cannot ask for high coverage unit-test
+    * different role/titles
+    * ml-pipeline code usually needs too much data transformation, too much work....
+* training / prediction may needs a lot of computation resource
+
+策略
+
+* automatic integration test - time saving (**1.5 days --> immediately**)
+* if ENV == DEV, samples = samples[:1000] (to speed up)
+
+成效
+* 降低恢復時間 (<1 天，可以自動測，就不用等那麼久)
+* 改版壞版比例(未知，但應當顯著減少)

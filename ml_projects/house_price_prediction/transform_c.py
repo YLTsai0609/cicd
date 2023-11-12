@@ -1,7 +1,28 @@
-from cicd.bq import BQ
+from typing import List
 import redis
+from google.cloud import bigquery
 
+class BQ:
+    def __init__(self):
+        self.client = bigquery.Client(project='dbhandling')
+
+    def query(
+        self,
+        sql: str,
+        priority: bigquery.QueryPriority = bigquery.QueryPriority.BATCH,
+    ) -> List[dict]:
+        job_config = bigquery.QueryJobConfig(
+            priority=priority,
+        )
+        query_job = self.client.query(
+            query=sql,
+            job_config=job_config,
+        )
+        result = [[row for row in rows] for rows in query_job]
+        return result
+    
 bq = BQ()
+
 
 def test_bq(bq):
     sql = 'SELECT * FROM `bigquery-public-data.covid19_aha.hospital_beds` LIMIT 1'
