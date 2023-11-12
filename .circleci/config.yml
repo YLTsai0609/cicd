@@ -152,6 +152,6 @@ workflows:
             branches:
               ignore:
                 - master
-      - unit-test-with-redis:
+      - house_price_prediction_integration_test:
           requires:
             - hold
