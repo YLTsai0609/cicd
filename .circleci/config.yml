@@ -110,7 +110,7 @@ jobs:
             pip install -r requirements-bq.txt 
             # sudo command is not found on cloud-sdk images
       - run:
-          name: test bq and redis
+          name: integration test
           no_output_timeout: 5m
           command: |
             export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-service-key.json
